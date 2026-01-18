@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
 
-First, run the development server:
+Проект интернет-магазина на Next.js.
+
+
+Для запуска проекта необходимо:
+
+- **Node.js** версии 18.17 или выше
+- **npm**, **yarn**, **pnpm** или **bun** (менеджер пакетов)
+
+### Установка Node.js
+
+Если Node.js не установлен, скачайте его с официального сайта:
+- [https://nodejs.org/](https://nodejs.org/) - рекомендуется LTS версия
+
+Проверить установку можно командой:
+```bash
+node --version
+```
+
+## Запуск проекта
+
+### 1. Клонирование репозитория
+
+```bash
+git clone <repository-url>
+cd AirShop
+```
+
+### 2. Установка зависимостей
+
+Выберите один из менеджеров пакетов:
+
+```bash
+npm install
+# или
+yarn install
+# или
+pnpm install
+# или
+bun install
+```
+
+### 3. Запуск в режиме разработки
 
 ```bash
 npm run dev
-# or
+# или
 yarn dev
-# or
+# или
 pnpm dev
-# or
+# или
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 4. Открытие приложения
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Откройте [http://localhost:3000](http://localhost:3000) в браузере.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Полезные ссылки
 
-## Learn More
+- **Демо скелетонов:** `/skeletons-demo`
+- **Демо ошибок:** `/errors-demo`
+- [Документация Next.js](https://nextjs.org/docs)
 
-To learn more about Next.js, take a look at the following resources:
+## Сборка для продакшена
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run build
+npm start
+```

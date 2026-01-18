@@ -47,7 +47,7 @@ interface ErrorConfig {
 /**
  * Парсит ответ ошибки с бэкенда и преобразует в стандартный формат
  */
-export function parseApiError(error: unknown): ApiError {
+export async function parseApiError(error: unknown): Promise<ApiError> {
   // Если это уже наш формат ошибки
   if (isApiError(error)) {
     return error;
@@ -55,7 +55,7 @@ export function parseApiError(error: unknown): ApiError {
 
   // Если это Response объект
   if (error instanceof Response) {
-    return parseResponseError(error);
+    return await parseResponseError(error);
   }
 
   // Если это Error объект

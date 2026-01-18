@@ -4,11 +4,27 @@
  * Этот файл содержит готовые примеры кода для различных сценариев
  */
 
+import { useState, useEffect } from "react";
+
+// Типы для примеров
+interface Product {
+  id: string;
+  name: string;
+  price: number;
+}
+
+// Заглушки для компонентов (используются только в примерах)
+const ProductCard = ({ product }: { product: Product }) => <div>{product.name}</div>;
+const Skeleton = () => <div>Loading...</div>;
+const YourComponent = () => <div>Your component content</div>;
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const router = { push: (url: string) => {} };
+
 // ============================================================================
 // 1. БАЗОВАЯ ОБРАБОТКА ОШИБОК В FETCH
 // ============================================================================
 
-import { parseApiError, getErrorMessage } from "@/lib/errors";
+import { parseApiError, getErrorMessage, ErrorType, type ApiError } from "@/lib/errors";
 
 async function loadProducts() {
   try {
@@ -83,7 +99,7 @@ async function loadProductsWithRetry() {
 
 import { useErrorHandler } from "@/hooks/use-error-handler";
 
-function ProductList() {
+function ProductListWithErrorHandler() {
   const [products, setProducts] = useState([]);
   const { error, isError, handleError, clearError } = useErrorHandler();
   
@@ -101,7 +117,7 @@ function ProductList() {
   
   return (
     <div>
-      {isError && (
+      {isError && error && (
         <ErrorDisplay 
           error={error} 
           onDismiss={clearError}
@@ -119,7 +135,7 @@ function ProductList() {
 
 import { useAsyncAction } from "@/hooks/use-error-handler";
 
-function ProductList() {
+function ProductListWithAsyncAction() {
   const { loading, data, error, isError, execute, reset } = useAsyncAction<Product[]>();
   
   useEffect(() => {
@@ -135,7 +151,7 @@ function ProductList() {
   };
   
   if (loading) return <div>Загрузка...</div>;
-  if (isError) return <ErrorDisplay error={error} onRetry={loadProducts} />;
+  if (isError && error) return <ErrorDisplay error={error} onRetry={loadProducts} />;
   if (!data) return null;
   
   return (
@@ -153,7 +169,7 @@ function ProductList() {
 
 import { useRetry } from "@/hooks/use-error-handler";
 
-function ProductList() {
+function ProductListWithRetry() {
   const [products, setProducts] = useState([]);
   const { retry, retrying, retryCount } = useRetry();
   const { handleError } = useErrorHandler();
@@ -195,30 +211,30 @@ function ProductList() {
 import { ErrorDisplay, InlineError, FullPageError } from "@/components/error-display";
 
 // Полный вариант с деталями
-function FullErrorExample({ error }) {
+function FullErrorExample({ error }: { error: ApiError }) {
   return (
     <ErrorDisplay
       error={error}
       onRetry={() => window.location.reload()}
-      onDismiss={() => setError(null)}
+      onDismiss={() => console.log('Dismissed')}
     />
   );
 }
 
 // Компактный вариант
-function CompactErrorExample({ error }) {
+function CompactErrorExample({ error }: { error: ApiError }) {
   return (
     <ErrorDisplay
       error={error}
       compact
-      onRetry={() => retryAction()}
-      onDismiss={() => setError(null)}
+      onRetry={() => console.log('Retrying...')}
+      onDismiss={() => console.log('Dismissed')}
     />
   );
 }
 
 // Встроенный вариант
-function InlineErrorExample({ error }) {
+function InlineErrorExample({ error }: { error: ApiError }) {
   return (
     <div className="space-y-2">
       <input type="text" />
@@ -228,7 +244,7 @@ function InlineErrorExample({ error }) {
 }
 
 // Полноэкранный вариант
-function FullPageErrorExample({ error }) {
+function FullPageErrorExample({ error }: { error: ApiError }) {
   return (
     <FullPageError
       error={error}
@@ -323,8 +339,8 @@ const rateLimitError = {
 // 10. ИСПОЛЬЗОВАНИЕ В useEffect
 // ============================================================================
 
-function ProductDetail({ productId }) {
-  const [product, setProduct] = useState(null);
+function ProductDetail({ productId }: { productId: string }) {
+  const [product, setProduct] = useState<Product | null>(null);
   const { error, handleError, clearError } = useErrorHandler();
   const [loading, setLoading] = useState(true);
   
@@ -349,7 +365,7 @@ function ProductDetail({ productId }) {
   };
   
   if (loading) return <Skeleton />;
-  if (error) return <ErrorDisplay error={error} onRetry={loadProduct} />;
+  if (error && error) return <ErrorDisplay error={error} onRetry={loadProduct} />;
   if (!product) return null;
   
   return <ProductCard product={product} />;
@@ -361,21 +377,26 @@ function ProductDetail({ productId }) {
 
 function LoginForm() {
   const { handleError } = useErrorHandler();
-  const [formError, setFormError] = useState(null);
+  const [formError, setFormError] = useState<ApiError | null>(null);
   const [loading, setLoading] = useState(false);
   
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setFormError(null);
     
     try {
+      const target = e.target as typeof e.target & {
+        email: { value: string };
+        password: { value: string };
+      };
+      
       const response = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          email: e.target.email.value,
-          password: e.target.password.value,
+          email: target.email.value,
+          password: target.password.value,
         }),
       });
       
@@ -388,7 +409,7 @@ function LoginForm() {
       const apiError = await handleError(err);
       
       // Показываем детали валидации в форме
-      if (apiError.type === ErrorType.VALIDATION_ERROR && apiError.details) {
+      if (apiError && apiError.type === ErrorType.VALIDATION_ERROR && apiError.details) {
         setFormError(apiError);
       }
     } finally {
@@ -422,7 +443,7 @@ function LoginForm() {
 
 function Dashboard() {
   const { error, handleError, clearError, withErrorHandling } = useErrorHandler();
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<{ products: any; categories: any; stats: any } | null>(null);
   
   useEffect(() => {
     loadAllData();
@@ -447,7 +468,7 @@ function Dashboard() {
     }
   };
   
-  if (error) {
+  if (error && error) {
     return <FullPageError error={error} onRetry={loadAllData} />;
   }
   

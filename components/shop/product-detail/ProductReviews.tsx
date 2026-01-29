@@ -3,7 +3,7 @@
 import { Star, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { formatDate } from "@/lib/format";
-import { Review } from "@/types/product";
+import { Review } from "@/features/product";
 
 interface ProductReviewsProps {
   reviews: Review[];

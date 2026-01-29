@@ -2,7 +2,7 @@
  * TypeScript типы для системы обработки ошибок
  */
 
-import { ApiError, ErrorType } from "@/lib/errors";
+import { ApiError, ErrorType } from "./lib";
 
 /**
  * Типы для различных HTTP методов
@@ -198,5 +198,3 @@ export interface ErrorLog {
   userAgent?: string;
   url?: string;
 }
-
-export {};

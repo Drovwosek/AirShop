@@ -2,7 +2,7 @@
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { ITEMS_PER_PAGE_OPTIONS } from "@/types/product";
+import { ITEMS_PER_PAGE_OPTIONS } from "@/features/product";
 
 interface PaginationProps {
   currentPage: number;

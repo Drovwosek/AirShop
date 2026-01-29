@@ -2,7 +2,7 @@
  * Дополнительные утилиты для работы с ошибками
  */
 
-import { ApiError, ErrorType, parseApiError } from "@/lib/errors";
+import { ApiError, ErrorType, parseApiError } from "./lib";
 import {
   ValidationError,
   ServerError,
@@ -11,8 +11,7 @@ import {
   ErrorContext,
   isValidationError,
   isServerError,
-  isAuthError,
-} from "@/types/errors";
+} from "./types";
 
 /**
  * Логирование ошибок (можно интегрировать с Sentry, LogRocket и т.д.)
@@ -74,12 +73,6 @@ export class ErrorLogger {
    */
   private static sendToMonitoring(log: ErrorLog): void {
     // Здесь можно интегрировать с Sentry, LogRocket, DataDog и т.д.
-    // Пример для Sentry:
-    // Sentry.captureException(log.error, {
-    //   contexts: { custom: log.context },
-    //   tags: { errorType: log.error.type },
-    // });
-    
     console.info("Sending to monitoring system:", log);
   }
 
@@ -138,7 +131,7 @@ export class ValidationErrorHelper {
     }
 
     const formErrors: Record<string, string> = {};
-    
+
     error.details.forEach((detail) => {
       if (!formErrors[detail.field]) {
         formErrors[detail.field] = detail.message;
@@ -441,5 +434,3 @@ export class ErrorFactory {
     };
   }
 }
-
-export {};

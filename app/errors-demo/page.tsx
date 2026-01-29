@@ -16,8 +16,10 @@ import {
   ErrorType,
   fetchWithErrorHandling,
   retryWithBackoff,
-} from "@/lib/errors";
-import { useErrorHandler, useAsyncAction, useRetry } from "@/hooks/use-error-handler";
+  useErrorHandler,
+  useAsyncAction,
+  useRetry,
+} from "@/features/errors";
 import { RefreshCw, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 

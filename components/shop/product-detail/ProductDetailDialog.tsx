@@ -4,7 +4,7 @@ import { ArrowLeft, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
-import { Product } from "@/types/product";
+import { Product } from "@/features/product";
 import { ProductImageCarousel } from "./ProductImageCarousel";
 import { ProductPriceSection } from "./ProductPriceSection";
 import { ProductActionsSection } from "./ProductActionsSection";

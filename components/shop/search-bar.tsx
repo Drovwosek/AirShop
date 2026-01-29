@@ -15,7 +15,7 @@ import {
   CommandList,
 } from "@/components/ui/command";
 import { SearchResultSkeleton } from "@/components/skeletons";
-import { Product } from "@/types/product";
+import { Product } from "@/features/product";
 import { formatPrice } from "@/lib/format";
 
 interface SearchBarProps {

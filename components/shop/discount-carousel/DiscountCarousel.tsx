@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Badge } from "@/components/ui/badge";
-import { Product } from "@/types/product";
+import { Product } from "@/features/product";
 import { DiscountSectionSkeleton } from "@/components/skeletons";
 import { DiscountCard } from "./DiscountCard";
 import { CarouselControls } from "./CarouselControls";

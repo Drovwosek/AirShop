@@ -2,8 +2,7 @@
 
 import { useState, useRef, useDeferredValue } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Product } from "@/types/product";
-import { searchProducts } from "@/services/products";
+import { Product, searchProducts } from "@/features/product";
 
 interface UseSearchReturn {
   query: string;

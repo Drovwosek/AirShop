@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from "react";
 import { toast } from "sonner";
-import { ApiError, parseApiError, getErrorMessage } from "@/lib/errors";
+import { ApiError, parseApiError, getErrorMessage } from "../lib";
 
 /**
  * Хук для управления ошибками в компонентах

@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useCallback, useMemo } from "react";
-import { Product } from "@/types/product";
-import { CartItem } from "@/types/cart";
+import { Product } from "@/features/product";
+import { CartItem } from "../types";
 import { toast } from "sonner";
 
 interface UseCartReturn {

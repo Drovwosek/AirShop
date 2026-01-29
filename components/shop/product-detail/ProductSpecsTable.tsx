@@ -1,6 +1,6 @@
 "use client";
 
-import { Product } from "@/types/product";
+import { Product } from "@/features/product";
 
 interface ProductSpecsTableProps {
   product: Product;

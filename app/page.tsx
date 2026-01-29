@@ -11,13 +11,11 @@ import {
   ProductDetailDialog,
   Pagination,
 } from "@/components/shop";
-import { useProducts } from "@/hooks/use-products";
-import { useCategories } from "@/hooks/use-categories";
-import { useSearch } from "@/hooks/use-search";
-import { useCart } from "@/hooks/use-cart";
-import { useFavorites } from "@/hooks/use-favorites";
-import { useProductDetail } from "@/hooks/use-product-detail";
-import { useCardImages } from "@/hooks/use-card-images";
+import { useProducts, useProductDetail, useCardImages } from "@/features/product";
+import { useCategories } from "@/features/categories";
+import { useSearch } from "@/features/search";
+import { useCart } from "@/features/cart";
+import { useFavorites } from "@/features/favorites";
 
 export default function Home() {
   // Хуки для управления данными и состоянием

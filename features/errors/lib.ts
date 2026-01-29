@@ -141,7 +141,7 @@ function parseErrorObject(error: Error | object): ApiError {
 
   // Определяем тип ошибки
   let type = ErrorType.UNKNOWN;
-  
+
   if (err.name === "TypeError" || err.message?.includes("fetch")) {
     type = ErrorType.NETWORK_ERROR;
   } else if (err.name === "AbortError" || err.message?.includes("timeout")) {
@@ -312,7 +312,7 @@ export async function fetchWithErrorHandling<T = any>(
 
     if (!response.ok) {
       const error = await parseResponseError(response);
-      
+
       if (logToConsole) {
         console.error("API Error:", error);
       }
@@ -332,7 +332,7 @@ export async function fetchWithErrorHandling<T = any>(
     return (await response.text()) as unknown as T;
   } catch (error) {
     const apiError = await parseApiError(error);
-    
+
     if (logToConsole) {
       console.error("Fetch Error:", apiError);
     }

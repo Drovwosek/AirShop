@@ -2,9 +2,9 @@
 
 import { useState, useCallback } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Product, ITEMS_PER_PAGE_OPTIONS } from "@/types/product";
-import { fetchProducts } from "@/services/products";
-import { ApiError } from "@/lib/errors";
+import { Product, ITEMS_PER_PAGE_OPTIONS } from "../types";
+import { fetchProducts } from "../service";
+import { ApiError } from "@/features/errors/lib";
 
 interface UseProductsOptions {
   initialLimit?: number;

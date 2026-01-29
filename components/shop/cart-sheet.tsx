@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Minus, Plus, Trash2, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SheetFooter } from "@/components/ui/sheet";
-import { CartItem } from "@/types/cart";
+import { CartItem } from "@/features/cart";
 import { formatPrice } from "@/lib/format";
 
 interface CartSheetProps {

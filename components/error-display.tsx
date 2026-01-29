@@ -20,7 +20,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { ApiError, ErrorType, getErrorMessage, getErrorColor } from "@/lib/errors";
+import { ApiError, ErrorType, getErrorMessage, getErrorColor } from "@/features/errors";
 
 interface ErrorDisplayProps {
   error: ApiError;

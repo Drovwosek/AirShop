@@ -11,7 +11,7 @@ import {
   SheetFooter,
 } from "@/components/ui/sheet";
 import { CartSheet } from "./cart-sheet";
-import { CartItem } from "@/types/cart";
+import { CartItem } from "@/features/cart";
 
 interface HeaderProps {
   cartItemsCount: number;

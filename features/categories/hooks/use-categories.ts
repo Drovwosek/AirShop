@@ -1,7 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { fetchCategories } from "@/services/products";
+import { fetchCategories } from "../service";
 
 interface UseCategoriesReturn {
   categories: string[];

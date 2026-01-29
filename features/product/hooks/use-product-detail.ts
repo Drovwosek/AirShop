@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { Product } from "@/types/product";
+import { Product } from "../types";
 import { toast } from "sonner";
 
 interface UseProductDetailReturn {
